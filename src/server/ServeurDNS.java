@@ -59,7 +59,7 @@ public class ServeurDNS {
 				UDPR.start();
 			}
 			else{
-				System.out.print("L'�x�cution par d�faut n'a pas d'autres arguments");
+				System.out.print("L'execution par defaut n'a pas d'autres arguments");
 			}
 		}
 		else{
