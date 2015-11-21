@@ -191,9 +191,11 @@ public class UDPReceiver extends Thread {
 					// *Lecture du Query Domain name, a partir du 13 byte
 					
 					// Recherche du byte 0x06
+					int QNameSizeAll = 0;
 					int start = 12;
 					while(buff[start] != 0x06) {
 						start++;
+						QNameSizeAll++;
 					}
 					
 					int i = 1;
@@ -201,6 +203,7 @@ public class UDPReceiver extends Thread {
 					int QNameSize = 0;
 					while (buff[start + i] != 0x00) {
 						QNameSize++;
+						QNameSizeAll++;
 						i++;
 					}
 					
@@ -295,10 +298,9 @@ public class UDPReceiver extends Thread {
 						Qpacket[1] = reqID[1];
 						
 						// QName
-						Qpacket[12] = 0x06;
 						int k;
-						for(k = 1; k < QName.length; k++) {
-							Qpacket[12+k] = QName[k];
+						for(k = 0; k < QNameSizeAll; k++) {
+							Qpacket[12+k] = buff[12+k];
 						}
 						Qpacket[12+k] = 0x00;
 
